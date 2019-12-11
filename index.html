@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>關於數組</title>
+    <style>
+        h3 {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>數組的用法跟數組有關的一些介紹</h1>
+    <h3>定義數組</h3>
+    // 創建方式：完整寫法>new Array() / 符號寫法>[] / 簡單寫法>Array() <br>
+    // 用[] 會自動把裡面內容轉成字符串 所以如果你想創建有10個元素的數組不能寫[10]
+    <script>
+        var people = new Array() // 創建一個空數組
+        var people = new Array(10) // 創建有十個元素的數組
+        var people = new Array('a', 'b', 'c') // 創建一個數組 內容依序為 a,b,c 數組中的元素以‘,’隔開
+    </script>
+
+    <h3>數組的長度(數組中有幾個元素)</h3>
+    ###length
+    <script>
+        var arr1 = [1, 2, 3, 4]
+        console.log(arr1.length)
+    </script>
+
+    <h3>獲取或添加數組元素的方式</h3>
+    // 獲取方式> arr1[index] 這裏的index為元素下標 下標從0開始<br>
+    // 比如你有一個數組arr2=[a,b,c] 你要獲取裡面的第一個元素>arr2[0]
+    <script>
+        var arr2 = [5, 6, 7]
+        console.log(arr2[0])
+        arr2[0] = 8 // 改變第一個元素
+        arr2[arr2.length] = 0 // 添加元素
+        console.log(arr2)
+    </script>
+
+    <h3>數組的遍歷方式</h3>
+    方式一：for循環 <br>
+    方式二：for-in <br><br>
+    // for(下標 in 數組名稱)
+    <script>
+        var arr3 = ['a', 'b', 'c', 'd']
+        for (i = 0; i < arr3.length; i++) {
+            console.log(arr3[i])
+        }
+        var arr4 = [1, 2, 3, 4]
+        for (j in arr4) {
+            console.log(arr4[j])
+        }
+    </script>
+
+    <h3>創建一個101-111的數組</h3>
+    // 巧妙使用 數組的遍歷＋添加數組元素的方式<br>
+    <script>
+        var arr5 = []
+        for (i = 101; i <= 111; i++) {
+            arr5[arr5.length] = i
+        }
+        console.log(arr5)
+    </script>
+    <h3>有五個按鈕 點擊按鈕改變其顏色</h3>
+    <input type="button" value="button1">
+    <input type="button" value="button2">
+    <input type="button" value="button3">
+    <input type="button" value="button4">
+    <input type="button" value="button5">
+
+    <script>
+        var arr6 = document.getElementsByTagName('input')
+        for (i = 0; i < arr6.length; i++) {
+            arr6[i].onclick = function () {
+                this.style.backgroundColor = 'pink'
+            }
+        }
+    </script>
+
+    <h3>函數當中的參數數組(arguments)</h3>
+    我們可以用arguments數組來求參數總和<br><br>
+
+    // 當你定義一個函數 讓他可以傳兩個參數 但你調用時傳了三個或更多參數時<br>
+    // 函數會自動幫你把所有傳入的參數保存到arguments裡面 我們稱arguments為參數數組
+    <script>
+        var total = 0
+
+        function sum() {
+            for (i in arguments) {
+                total = total + arguments[i]
+            }
+            return total
+        }
+        console.log(sum(1, 2, 3, 4))
+    </script>
+
+    <h3>數組的複製</h3>
+    當你賦予值b=a後 修改了b的值 a並不會跟著改變 但如果是數組arr2=arr1 就會變<br><br>
+    // 在變量中當你聲明 var b=a 就叫做值複製 但a跟b都是獨立存在的變量<br>
+    // 在數組中這樣類似於在桌面創建快捷鍵 他們指向的都是同一個數組<br>
+    // 所以如果要複製數組來個別使用 只能使用遍歷的方式添加到創建的新的空數組中
+    <script>
+        var a = 87
+        var b = a
+        b = 23
+        console.log(a)
+
+        var arr9 = [1, 2, 3, 4]
+        var arr10 = arr9
+        arr10[0] = 100
+        console.log(arr9)
+
+        var arr8 = [1, 2, 3, 4]
+        var arr11 = []
+        for (i in arr8) {
+            arr11[i] = arr8[i]
+        }
+        arr11[0] = 200
+        console.log(arr11)
+        console.log(arr8)
+    </script>
+
+    <h3>數組元素的添加/刪除方式【shift、pop、push、unshift】</h3>
+    // shift：刪除第一個元素 並返回被刪除的那個元素<br>
+    //pop：刪除最後一個元素 並返回被刪除的那個元素<br>
+    // push：往最後面添加新的元素(push幾個就添加幾個) 並返回數組添加後的長度<br>
+    // unshift：往最開頭添加新的元素(unshift幾個就添加幾個) 並返回數組添加後的長度
+    <script>
+        var arr = ['豆腐', '炸雞', '香菇']
+
+        // shift：刪除第一個元素 並返回被刪除的那個元素
+        var temp = arr.shift();
+        console.log(temp)
+
+        //pop：刪除最後一個元素 並返回被刪除的那個元素
+        temp = arr.pop();
+        console.log(temp)
+
+        // push：往最後面添加新的元素(push幾個就添加幾個) 並返回數組添加後的長度
+        temp = arr.push('海苔', '豆皮');
+        console.log(temp)
+
+        // unshift：往最開頭添加新的元素(unshift幾個就添加幾個) 並返回數組添加後的長度
+        temp = arr.unshift('香蕉', '蘋果', '鳳梨');
+        console.log(temp)
+
+        console.log(arr)
+    </script>
+
+    <h3>數組元素的排序：直接排序</h3>
+    以第一個數為基礎 然後拿第二個數與之做比較 如果比較大就放排好的數後面<br>
+    第三個數就繼續跟前面排好的數做比較 比較小就往前排 比較大就放在最後面 依此類推
+    <script>
+        // 案例：假設有一個無序數組 要由小到大重新排列。
+        var arr12 = [23, 12, 1, 2444, 56, 33, 7, 93, 10, 2, 44]
+
+        // 首先以第一個數(下標為0)為排序標準 所以下標i從1開始 進行數組遍歷
+        for (i = 1; i < arr12.length; i++) {
+
+            // 然後聲明num是每次循環時 要拿去跟'排好的數'比較的數字
+            // 即num是'目前要排序'的數
+            num = arr12[i]
+
+            // 然後開始比較num跟'已排好的數'誰比較大
+            // 這裏下標i就是num , i-1(也就是j)就是目前已排好的數
+            for (j = i - 1; j >= 0; j--) {
+                if (num > arr12[j]) { // 當'要排序的數'大於'排好的數'就結束循環
+                    break
+                } else { // 下標j+1是目前已排好的數的後一個數 
+                    // 當num小於目前排好的數 那目前最大數就是目前被比較的數
+                    // 等於把num往前繼續做比較 順序也隨之往前挪
+                    arr12[j + 1] = arr12[j]
+                }
+            }
+            // 這裏是當num大於目前排好的數 那num就是目前排好的最後一個數 無需往前挪
+            arr12[j + 1] = num
+        }
+        console.log(arr12)
+    </script>
+
+    <h3>數組元素的排序：冒泡排序</h3>
+    從第一個數開始 拿第一個數往後面其他所有數比較<br>
+    假設第一個數大於第二個數 就變成他放在二 然後他繼續跟三比較<br>
+    如果三大 就換拿三跟四比較 如果還是三大 就繼續用三跟五比較<br>
+    繼續往後推推推 看誰大誰就放到最後面 排完後開始第二次比較<br>
+    一樣從目前第一個數拿出來跟後面的數比 直到沒得往後比為止
+
+    <script>
+        var arr13 = [89, 12, 5, 1, 42, 22, 4, 23, 66, 25]
+        for (i = 0; i < arr13.length; i++) { // 從第一個數開始 每兩個數比較'總共有幾個數-1'次
+            for(j=0;j<arr13.length-1-i;j++){ // i表示比較了幾次 所以j就是不用比較的有幾個數
+                if(arr13[j]>arr13[j+1]){ // 如果目前的數比下一個數大 兩個數就交換位置
+                    var num=arr13[j]
+                    arr13[j]=arr13[j+1]
+                    arr13[j+1]=num
+                }
+            }
+        }
+        console.log(arr13)
+
+    </script>
+
+</body>
+
+</html>
